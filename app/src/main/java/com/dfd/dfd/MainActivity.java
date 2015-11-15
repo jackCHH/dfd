@@ -17,6 +17,7 @@ import com.microsoft.band.BandInfo;
 import com.microsoft.band.BandIOException;
 import com.microsoft.band.ConnectionState;
 import com.microsoft.band.BandPendingResult;
+import com.microsoft.band.UserConsent;
 import com.microsoft.band.sensors.BandHeartRateEvent;
 import com.microsoft.band.sensors.BandHeartRateEventListener;
 import com.microsoft.band.sensors.HeartRateConsentListener;
@@ -57,7 +58,38 @@ public class MainActivity extends AppCompatActivity{
                 // handle BandException
         }
 
+        // check current user heart rate consent
+        if(bandClient.getSensorManager().getCurrentHeartRateConsent() !=
+                UserConsent.GRANTED) {
+            // user hasn’t consented, request consent
+            // the calling class is an Activity and implements
+            // HeartRateConsentListener
+            bandClient.getSensorManager().requestHeartRateConsent(this,
+                    mHeartRateConsentListener);
+        }
+
     }
+
+    public HeartRateConsentListener mHeartRateConsentListener= new HeartRateConsentListener() {
+        @Override
+        public void userAccepted(boolean b) {
+            BandHeartRateEventListener heartRateListener = new BandHeartRateEventListener() {
+                @Override
+                public void onBandHeartRateChanged(BandHeartRateEvent event) {
+                    // do work on heart rate changed (i.e., update UI)
+                    //send to socket
+                }
+            };
+
+            try {
+                // register the listener
+                bandClient.getSensorManager().registerHeartRateEventListener(
+                        heartRateListener);
+            } catch(BandException ex) {
+                // handle BandException
+            }
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
