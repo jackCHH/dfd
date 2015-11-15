@@ -3,7 +3,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/club_pic">
+                android:background="@drawable/main_pic">
 
     <Button
         android:layout_width="wrap_content"
@@ -24,10 +24,26 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="@color/background_floating_material_dark"
         android:text="Choose your role"
         android:id="@+id/role_header"
-        android:layout_marginTop="78dp"
+        android:textColor="#fffff9"
+        android:textIsSelectable="true"
+        android:textSize="35dp"
+        android:layout_below="@+id/voteButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-115dp"
+        android:autoText="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
+        android:text="Dance Floor Democracy"
+        android:id="@+id/textView2"
+        android:textColor="#f6fff6"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true"
+        android:textSize="35dp"
+        android:typeface="sans" />
 </RelativeLayout>
