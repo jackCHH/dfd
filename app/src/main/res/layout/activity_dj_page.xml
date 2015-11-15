@@ -6,20 +6,10 @@
     android:orientation="horizontal"
     android:weightSum="1">
 
-    <EditText android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="DJ"
-        android:text="DJ"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:editable="false" />
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_below="@+id/title"
         android:layout_centerHorizontal="true"
         tools:listitem="@android:layout/simple_list_item_2"
         android:headerDividersEnabled="false" />
@@ -43,6 +33,15 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="DJ"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
