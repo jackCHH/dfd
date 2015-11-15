@@ -41,4 +41,60 @@
         android:textSize="30dp"
         android:layout_alignTop="@+id/voterRank"
         android:layout_centerHorizontal="true"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/voterRank"
+        android:layout_alignParentStart="true">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Smooth Jazz"
+            android:id="@+id/smoothJazz"
+            android:textSize="24dp"
+            android:checked="true"
+            android:onClick="onRadioButtonClicked"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Acoustic Guitar"
+            android:id="@+id/acousticGuitar"
+            android:textSize="24dp"
+            android:onClick="onRadioButtonClicked"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hit Radio"
+            android:id="@+id/hitRadio"
+            android:textSize="24dp"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User 1"
+            android:id="@+id/user1"
+            android:singleLine="false"
+            android:onClick="onRadioButtonClicked"
+            android:checked="true"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User 2"
+            android:id="@+id/user2"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+
 </RelativeLayout>

@@ -1,5 +1,9 @@
 package com.dfd.dfd;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -13,6 +17,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -23,6 +31,7 @@ public class djPage extends AppCompatActivity {
     private static final int REFRESH_RATE = 10000;
     private Random rand= new Random();
     private int songNum= 0;
+    private String mGenre;
 
     private String[] streamURLs= {"http://listen.radionomy.com/smoothjazz247",
     "http://listen.radionomy.com/acoustic-fm"};
@@ -58,10 +67,11 @@ public class djPage extends AppCompatActivity {
                 // Otherwise, request that the BubbleView be redrawn.
 
                 try {
-                    songNum= 1-songNum;
-                    Log.i(TAG, "changing song to " + streamURLs[songNum]);
+//                    songNum= 1-songNum;
+                    mGenre= getTop();
+                    Log.i(TAG, "changing song to " + mGenre);
                     if (mPlayer.isPlaying()) mPlayer.reset();
-                    mPlayer.setDataSource(streamURLs[songNum]);
+                    mPlayer.setDataSource(mGenre);
                     mPlayer.prepare();
                     mPlayer.start();
 
@@ -108,6 +118,59 @@ public class djPage extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public String getTop() {
+        HttpURLConnection urlConnection= null;
+        try {
+            Log.i(TAG, "URL: "+"https://moloso.herokuapp" +
+                    ".com/stats/");
+            URL url = new URL("https://moloso.herokuapp" +
+                    ".com/stats.json");
+            urlConnection = (HttpURLConnection) url.openConnection();
+            Log.i(TAG, "opened connection");
+            urlConnection.setRequestMethod("GET");
+            urlConnection.setRequestProperty("Content-type", "application/JSON");
+            if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                // OK
+                Log.i(TAG, "success");
+                BufferedReader rd= new BufferedReader(new InputStreamReader(urlConnection
+                        .getInputStream()));
+                StringBuilder sb= new StringBuilder();
+                String line= null;
+                while((line= rd.readLine()) != null) {
+                    sb.append(line+'\n');
+                }
+                Log.i(TAG, sb.toString());
+                return highestHeartGenre(new JSONArray(sb.toString()));
+            } else {
+                // Server returned HTTP error code.
+                Log.i(TAG, ""+urlConnection.getResponseCode());
+            }
+        } catch (Exception e) {
+            Log.i(TAG, ""+e);
+        } finally{
+            if (urlConnection!=null) urlConnection.disconnect();
+        }
+        return "";
+    }
+
+    public String highestHeartGenre(JSONArray json) {
+//        Log.i(TAG, "JSON: "+json.get(0).getClass());
+        int max=0;
+        String maxGenre= "";
+        for (int i=0; i<json.length(); i++) {
+            try {
+                JSONObject thisHeartRate= (JSONObject) json.get(i);
+                if ((int) thisHeartRate.get("heartrate") > max) {
+                    max= (int) thisHeartRate.get("heartrate");
+                    maxGenre= (String) thisHeartRate.get("genre");
+                }
+            } catch (JSONException e) {
+                Log.i(TAG, "ERROR: "+e);
+            }
+        }
+        return maxGenre;
     }
 }
 
