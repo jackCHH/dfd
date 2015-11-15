@@ -21,12 +21,14 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape">
         </activity>
         <activity
             android:name=".rolePage"
             android:label="@string/title_activity_role_page"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,11 +38,13 @@
         <activity
             android:name=".voterPage"
             android:label="@string/title_activity_voter_page"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape">
         </activity>
         <activity
             android:name=".djPage"
-            android:label="@string/title_activity_dj_page" >
+            android:label="@string/title_activity_dj_page"
+            android:screenOrientation="landscape">
         </activity>
     </application>
 
