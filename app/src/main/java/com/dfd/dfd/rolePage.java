@@ -12,6 +12,7 @@ import android.widget.Button;
 public class rolePage extends AppCompatActivity {
 
     Button voterButton;
+    Button djButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,17 @@ public class rolePage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        djButton= (Button) findViewById(R.id.DJ);
+        djButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getApplicationContext(), djPage.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
 }

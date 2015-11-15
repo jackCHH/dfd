@@ -38,6 +38,10 @@
             android:label="@string/title_activity_voter_page"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".djPage"
+            android:label="@string/title_activity_dj_page" >
+        </activity>
     </application>
 
 </manifest>
