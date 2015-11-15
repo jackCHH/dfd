@@ -28,7 +28,7 @@ public class djPage extends AppCompatActivity {
     final String TAG= "djPage";
 
     private ScheduledFuture<?> mMoverFuture;
-    private static final int REFRESH_RATE = 10000;
+    private static final int REFRESH_RATE = 20000;
     private Random rand= new Random();
     private int songNum= 0;
     private String mGenre;

@@ -27,7 +27,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Rank: "
+        android:text="Your Heart Rate: "
         android:id="@+id/voterRank"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
@@ -55,7 +55,10 @@
             android:id="@+id/smoothJazz"
             android:textSize="24dp"
             android:checked="true"
-            android:onClick="onRadioButtonClicked"/>
+            android:onClick="onRadioButtonClicked"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:shadowColor="#010101" />
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -63,7 +66,10 @@
             android:text="Acoustic Guitar"
             android:id="@+id/acousticGuitar"
             android:textSize="24dp"
-            android:onClick="onRadioButtonClicked"/>
+            android:onClick="onRadioButtonClicked"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:shadowColor="#010101" />
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -71,14 +77,23 @@
             android:text="Hit Radio"
             android:id="@+id/hitRadio"
             android:textSize="24dp"
-            android:onClick="onRadioButtonClicked"/>
+            android:onClick="onRadioButtonClicked"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:shadowColor="#010101" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></LinearLayout>
     </RadioGroup>
 
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/voter_header">
 
         <RadioButton
             android:layout_width="wrap_content"
