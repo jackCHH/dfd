@@ -16,24 +16,46 @@ import com.microsoft.band.BandException;
 import com.microsoft.band.BandInfo;
 import com.microsoft.band.BandIOException;
 import com.microsoft.band.ConnectionState;
+import com.microsoft.band.BandPendingResult;
+import com.microsoft.band.sensors.BandHeartRateEvent;
+import com.microsoft.band.sensors.BandHeartRateEventListener;
+import com.microsoft.band.sensors.HeartRateConsentListener;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
+
+    BandInfo[] pairedBands;
+    BandClient bandClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+        pairedBands = BandClientManager.getInstance().getPairedBands();
+        // changed getActivity() to this
+        bandClient = BandClientManager.getInstance().create(this, pairedBands[0]);
+
+        BandPendingResult<ConnectionState> pendingResult =
+                bandClient.connect();
+        try {
+            ConnectionState state = pendingResult.await();
+            if(state == ConnectionState.CONNECTED) {
+                try {
+                    BandPendingResult<String> pendingVersion = bandClient.getFirmwareVersion();
+                    final String fwVersion = pendingVersion.await();
+                    pendingVersion = bandClient.getHardwareVersion();
+                    final String hwVersion = pendingVersion.await();
+                } catch (InterruptedException | BandException ex) {
+                    // catch
+                }
+            } else {
+                // do work on failure
             }
-        });
+        } catch(InterruptedException ex) {
+                // handle InterruptedException
+        } catch(BandException ex) {
+                // handle BandException
+        }
 
     }
 
